@@ -21,9 +21,6 @@
 - name: rename conf file
   command: mv {{ virtualhost_file_dest }}/serveraddress.j2 {{ virtualhost_file_dest }}/{{ name }}.conf
 
-- name: Debug index_file_local variable
-  debug:
-    var: index_file_local
 
 - name: create new site files folder
   ansible.builtin.file:
