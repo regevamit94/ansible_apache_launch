@@ -1,0 +1,10 @@
+---
+# vars file for configurations
+name: letsdoit
+servername: letsdoit.com
+apache2_conf_file_local: /home/amit/ans-apache-install/configurations/files/apache2.conf
+apache2_conf_file_dest: /etc/apache2
+virtualhost_file_local: /home/amit/ans-apache-install/configurations/files/serveraddress.j2
+virtualhost_file_dest: /etc/apache2/sites
+index_file_local: /home/amit/ans-apache-install/configurations/files/index.html
+index_file_dest: /webserv/{{ servername }}/index.html

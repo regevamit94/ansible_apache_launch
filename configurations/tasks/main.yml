@@ -1,0 +1,43 @@
+---
+# tasks file for configurations
+- name: copy apache2.conf file to host
+  ansible.builtin.copy:
+    src: "{{ apache2_conf_file_local}}"
+    dest: "{{ apache2_conf_file_dest }}"
+
+
+- name: create new sites folder
+  ansible.builtin.file:
+    path: /etc/apache2/sites/
+    state: directory
+
+
+- name: copy local virtualhost conf inside the webserver
+  ansible.builtin.template:
+    src: "{{ virtualhost_file_local }}"
+    dest: "{{ virtualhost_file_dest }}"
+
+
+- name: rename conf file
+  command: mv {{ virtualhost_file_dest }}/serveraddress.j2 {{ virtualhost_file_dest }}/{{ name }}.conf
+
+- name: Debug index_file_local variable
+  debug:
+    var: index_file_local
+
+- name: create new site files folder
+  ansible.builtin.file:
+    path: /webserv/{{ servername }}
+    state: directory
+
+- name: copy index file to remote host
+  ansible.builtin.copy:
+    src: "{{ index_file_local }}"
+    dest: "{{ index_file_dest }}"
+    remote_src: no
+
+
+- name: restart apache2 service
+  ansible.builtin.service:
+    name: apache2
+    state: restarted

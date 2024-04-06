@@ -1,0 +1,17 @@
+---
+# tasks file for apache-install
+
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: packages install
+  ansible.builtin.package:
+    name: 
+     - net-tools
+     - python3
+     - apache2
+     - openssh-server
+     - mysql-server
+    state: present
